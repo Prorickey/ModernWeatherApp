@@ -9,16 +9,16 @@ import Foundation
 import CoreLocation
 
 @MainActor class LocationsHandler: ObservableObject {
-    static let shared = LocationsHandler()  // Create a single, shared instance of the object.
+    static let shared = LocationsHandler()
 
     private let manager: CLLocationManager
 
     @Published var lastUpdate: CLLocationUpdate? = nil
-    @Published var lastLocation = CLLocation(latitude: 0.0, longitude: 0.0)
+    @Published var lastLocation = CLLocation(latitude: 35.729733, longitude: -81.687194)
     @Published var count = 0
     @Published var isStationary = false
     
-    @Published var city = "GoonTown"
+    @Published var city = "Morganton"
 
     @Published
     var updatesStarted: Bool = true
@@ -34,18 +34,14 @@ import CoreLocation
         if manager.authorizationStatus != .authorizedWhenInUse {
             self.manager.requestWhenInUseAuthorization()
         }
-        print("Starting location updates")
-        Task {
+        /*Task {
             do {
                 let updates = CLLocationUpdate.liveUpdates()
                 for try await update in updates {
                     if !self.updatesStarted { break }  // End location updates by breaking out of the loop.
                     self.lastUpdate = update
                     if let loc = update.location {
-                        print("Update location")
-                        print(loc)
                         self.lastLocation = loc
-                        print(self.lastLocation)
                         self.isStationary = update.stationary
                         self.count += 1
                         
@@ -58,8 +54,7 @@ import CoreLocation
             } catch {
                 print("Could not start location updates")
             }
-            return
-        }
+        }*/
     }
 }
 

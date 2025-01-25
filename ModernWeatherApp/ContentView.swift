@@ -34,10 +34,10 @@ struct ContentView: View {
                     let width = getScreenBounds().width
                     let height = getScreenBounds().height
                     path.move(to: CGPoint(x: 0, y: height))
-                    path.addLine(to: CGPoint(x: 0, y: 20)) // Starting height of the curve
+                    path.addLine(to: CGPoint(x: 0, y: 20))
                     path.addQuadCurve(
-                        to: CGPoint(x: width, y: 20), // Ending point of the curve
-                        control: CGPoint(x: width / 2, y: -5) // Control point for oval curve
+                        to: CGPoint(x: width, y: 20),
+                        control: CGPoint(x: width / 2, y: -5)
                     )
                     path.addLine(to: CGPoint(x: width, y: height))
                     path.closeSubpath()
@@ -60,8 +60,12 @@ struct TemperatureSlider: View {
     
     init(weatherData: WeatherData) {
         weatherData.hourly.forEach { data in
+            var type: WeatherType = .sunny
+            if data.cloudCoverage > 0.5 {
+                type = .cloudy
+            }
             cards.append(
-                HourWeatherCard(type: .windy,
+                HourWeatherCard(type: type,
                                 temp: data.temperature2m,
                                 time: Double(data.time))
             )
@@ -115,6 +119,7 @@ enum WeatherType {
     case snowing
     case rainy
     case thundering
+    case cloudy
 }
 
 struct HourWeatherCard: View, Hashable {
@@ -125,7 +130,7 @@ struct HourWeatherCard: View, Hashable {
     private var now: Bool
     private var formatter: DateFormatter
     
-    // time is [-5, 24] relative to NOW
+    // time is [0, 24] relative to NOW
     init(type: WeatherType, temp: Float, time: Double) {
         switch(type) {
         case .windy:
@@ -137,7 +142,9 @@ struct HourWeatherCard: View, Hashable {
         case .thundering:
             weatherIcon = "cloud.bolt.fill"
         case .sunny:
-            weatherIcon = "sun.max"
+            weatherIcon = "sun.max.fill"
+        case .cloudy:
+            weatherIcon = "cloud.fill"
         }
         
         self.temperature = temp
@@ -163,7 +170,9 @@ struct HourWeatherCard: View, Hashable {
             
             Image(systemName: weatherIcon)
                 .resizable()
+                .scaledToFit()
                 .frame(width: 35, height: 35)
+
             Text("\(String(format: "%.1f", getFahrenheit(temperature)))°")
                 .font(.title3)
         }
