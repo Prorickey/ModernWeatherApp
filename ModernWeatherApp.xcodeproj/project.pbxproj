@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DC8769602D442F4B0072A94A /* OpenMeteoSdk in Frameworks */ = {isa = PBXBuildFile; productRef = DC87695F2D442F4B0072A94A /* OpenMeteoSdk */; };
+		DCAA6EF52D44928A00E0C9C3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = DCAA6EF42D44928400E0C9C3 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		DC5283432D442DC5005892E9 /* ModernWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModernWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC5283552D442DC8005892E9 /* ModernWeatherAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModernWeatherAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC52835F2D442DC8005892E9 /* ModernWeatherAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModernWeatherAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCAA6EF42D44928400E0C9C3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -93,6 +95,7 @@
 		DC52833A2D442DC5005892E9 = {
 			isa = PBXGroup;
 			children = (
+				DCAA6EF42D44928400E0C9C3 /* .gitignore */,
 				DC5283452D442DC5005892E9 /* ModernWeatherApp */,
 				DC5283582D442DC8005892E9 /* ModernWeatherAppTests */,
 				DC5283622D442DC8005892E9 /* ModernWeatherAppUITests */,
@@ -237,6 +240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCAA6EF52D44928A00E0C9C3 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
