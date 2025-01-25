@@ -59,33 +59,52 @@ struct TemperatureSlider: View {
     private var cards: [HourWeatherCard] = []
     
     init(weatherData: WeatherData) {
-        var i = 0
-        weatherData.hourly.temperature2m.forEach { temp in
-            if i == 24 {
-                return
-            } else {
-                cards.append(
-                    HourWeatherCard(type: .windy,
-                                    temp: temp,
-                                    time: Double(i))
-                )
-                
-                i += 1
-            }
+        weatherData.hourly.forEach { data in
+            cards.append(
+                HourWeatherCard(type: .windy,
+                                temp: data.temperature2m,
+                                time: Double(data.time))
+            )
         }
     }
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {
+                Spacer()
                 ForEach(cards, id: \.self) { card in
                     card
                 }
+                Spacer()
             }
             .frame(alignment: .leading)
         }
         .frame(width: .infinity)
-        .padding(EdgeInsets(top: 40, leading: 10, bottom: 4, trailing: 10))
+        .padding(EdgeInsets(top: 40, leading: 0, bottom: 4, trailing: 0))
+        .overlay {
+            GeometryReader { gp in
+                Rectangle()
+                    .fill(
+                        LinearGradient(gradient: Gradient(stops: [
+                            .init(color: Color(UIColor.systemBackground).opacity(0.01), location: 0),
+                            .init(color:
+                                    Color(#colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)), location: 1)
+                        ]), startPoint: .leading, endPoint: .trailing)
+                    )
+                    .frame(width: 0.1 * gp.size.width)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                Rectangle()
+                    .fill(
+                        LinearGradient(gradient: Gradient(stops: [
+                            .init(color: Color(UIColor.systemBackground).opacity(0.01), location: 0),
+                            .init(color:
+                                    Color(#colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)), location: 1)
+                        ]), startPoint: .trailing, endPoint: .leading)
+                    )
+                    .frame(width: 0.1 * gp.size.width)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
     }
     
 }

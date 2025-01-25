@@ -42,7 +42,10 @@ import CoreLocation
                     if !self.updatesStarted { break }  // End location updates by breaking out of the loop.
                     self.lastUpdate = update
                     if let loc = update.location {
+                        print("Update location")
+                        print(loc)
                         self.lastLocation = loc
+                        print(self.lastLocation)
                         self.isStationary = update.stationary
                         self.count += 1
                         
